@@ -302,4 +302,3 @@ export class Element extends HTMLElement {
         return OBSERVED_ATTRIBUTES; 
     }
 }
-]
