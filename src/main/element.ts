@@ -8,7 +8,7 @@ import { loadIcon, loadLottieAnimation, registerIcon, registerLoader, registerAn
 const ELEMENT_STYLE = '';
 
 const OBSERVED_ATTRIBUTES = [
-    'palette',
+    'palette', 
     'src',
     'icon',
     'animation',
@@ -32,6 +32,7 @@ export class Element extends HTMLElement {
     protected speed?: string;
     protected params?: string;
     protected target?: string;
+    protected size?: string;
 
     /**
      * Register Lottie library.
@@ -301,3 +302,4 @@ export class Element extends HTMLElement {
         return OBSERVED_ATTRIBUTES; 
     }
 }
+]
