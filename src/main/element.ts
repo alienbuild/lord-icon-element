@@ -5,37 +5,7 @@ import { deepClone } from '../helpers/utils.js';
 import { loadIcon, loadLottieAnimation, registerIcon, registerLoader, registerAnimation, connectInstance, disconnectInstance,
     getIcon, getAnimation } from './manager.js';
 
-const ELEMENT_STYLE = `
-    :host {
-        display: inline-flex;
-        width: 32px;
-        height: 32px;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        vertical-align: middle;
-        fill: currentcolor;
-        stroke: none;
-        overflow: hidden;
-    }
-
-    svg {
-        pointer-events: none;
-        display: block;
-    }
-
-    div {    
-        width: 100%;
-        height: 100%;
-    }
-
-    div.slot {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 2;
-    }
-`;
+const ELEMENT_STYLE = '';
 
 const OBSERVED_ATTRIBUTES = [
     'palette',
@@ -44,7 +14,8 @@ const OBSERVED_ATTRIBUTES = [
     'animation',
     'speed',
     'target',
-    'params',
+    'params', 
+    'size'
 ];
 
 type SUPPORTED_ATTRIBUTES = 'palette'|'params'|'src'|'icon'|'animation'|'speed'|'target';
@@ -131,7 +102,37 @@ export class Element extends HTMLElement {
         this.isReady = true;
 
         const style = document.createElement('style');
-        style.innerHTML = ELEMENT_STYLE;
+        style.innerHTML = `
+            :host {
+                display: inline-flex;
+                width: ${this.size};
+                height: ${this.size};
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                vertical-align: middle;
+                fill: currentcolor;
+                stroke: none;
+                overflow: hidden;
+            }
+
+            svg {
+                pointer-events: none;
+                display: block;
+            }
+
+            div {    
+                width: 100%;
+                height: 100%;
+            }
+
+            div.slot {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+            }
+        `;
         this.root.appendChild(style);
 
         const slotContainer = document.createElement('div');
